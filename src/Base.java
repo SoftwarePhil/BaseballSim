@@ -13,7 +13,7 @@ public void removePlayerFromBase(){
 	playerOnBase = null;
 	isFull = false;
 }
-
+//This is a test change
 public boolean getIsFull(){
 	return isFull;
 }
