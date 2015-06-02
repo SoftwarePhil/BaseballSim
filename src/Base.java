@@ -9,9 +9,18 @@ public void addPlayerToBase(Player p){
 	isFull = true;
 }
 
+public void movePlayerOneBase(Player p){
+	playerOnBase = null;
+	nextBase.addPlayerToBase(p);
+}
+
 public void removePlayerFromBase(){
 	playerOnBase = null;
 	isFull = false;
+}
+
+public Player getPlayerOnBase(){
+	return playerOnBase;
 }
 //This is a test change
 public boolean getIsFull(){
