@@ -7,3 +7,9 @@
 /PlayerState.class
 /Team.class
 /Running.class
+/CurrentBat.class
+/CurrentBase.class
+/CurrentField.class
+/CurrentBatting.class
+/Batting.class
+/Pitcher.class
