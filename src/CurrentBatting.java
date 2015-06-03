@@ -1,12 +1,12 @@
 //test
 public class CurrentBatting {
 
-Pitcher pitcher;
-Player player;
+private Pitcher pitcher;
+private Player player;
 
-private int strikes;
-private int balls;
-private int fouls;
+private int strikes = 0;
+private int balls = 0;
+private int fouls = 0;
 
 public CurrentBatting(Pitcher p, Player py){
 	pitcher = p;
@@ -37,5 +37,11 @@ public void setFouls(int fouls) {
 	this.fouls = fouls;
 }
 
+public Player getPlayer() {
+	return player;
+}
 
+public Pitcher getPitcher() {
+	return pitcher;
+}
 }

@@ -15,4 +15,8 @@ public String toString(){
 	return name;
 }
 
+public float getBattingAverage(){
+	return battingAverage;
+}
+
 }
