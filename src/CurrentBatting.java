@@ -1,4 +1,3 @@
-//test
 public class CurrentBatting {
 
 Pitcher pitcher;
