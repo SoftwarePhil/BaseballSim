@@ -6,18 +6,20 @@ private Player player;
 private int strikes = 0;
 private int balls = 0;
 private int fouls = 0;
+private String result;
 
 public CurrentBatting(Pitcher p, Player py){
 	pitcher = p;
 	player = py;
 }
 
-public int getStrikes() {
-	return strikes;
+
+public void addStrike() {
+	strikes = strikes + 1;
 }
 
-public void setStrikes(int strikes) {
-	this.strikes = strikes;
+public int getStrikes(){
+	return strikes;
 }
 
 public int getBalls() {
@@ -42,5 +44,13 @@ public Player getPlayer() {
 
 public Pitcher getPitcher() {
 	return pitcher;
+}
+
+public String getResult() {
+	return result;
+}
+
+public void setResult(String result) {
+	this.result = result;
 }
 }

@@ -2,21 +2,53 @@
 public class Batting {
 
 private CurrentBatting currentBatting;
-private float bA;
+private Player player;
+private Pitcher pitcher;
+private int outcome;
+private int strikes;
+private int hit;
 
-public Batting (CurrentBatting cb){
+public void startBatting (CurrentBatting cb){
 	currentBatting = cb;
-	bA = currentBatting.getPlayer().getBattingAverage();
+	pitcher = cb.getPitcher();
+	player = cb.getPlayer();
 }
 
-public void pitch(){
-
-if(currentBatting.getStrikes() > 3){
-	
-}
+public int atBat(){
+	strikes = currentBatting.getStrikes();
+	while(strikes <= 2){
+		outcome = pitch();
+		if(outcome == 0){
+			strikes = currentBatting.getStrikes();
+		}
+		else{
+			return hit();
+		}
+	}
+	return 0;
 } 
 
-public void batterDone(){
-	
+public int pitch(){
+	int temp = (int)(player.getBattingAverage() * Math.random() * 100);
+	if(temp < 20){
+		currentBatting.addStrike();
+		System.out.println("Strikes " + currentBatting.getStrikes() + " outcome " + temp);
+		return 0;
+	}
+	else return temp;
+}
+
+public int hit(){
+	hit = (int)(Math.random() *100);
+	if(hit <= player.getChanceOfSingle()){
+		return 1;
+	}
+	if(hit <= player.getChanceOfDouble()){
+		return 2;
+	}
+	if (hit <= player.getChanceOfTriple()){
+		return 3;
+	}
+	else return 4;
 }
 }
