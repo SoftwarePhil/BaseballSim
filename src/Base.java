@@ -9,9 +9,9 @@ public void addPlayerToBase(Player p){
 	isFull = true;
 }
 
-public void movePlayerOneBase(Player p){
-	playerOnBase = null;
-	nextBase.addPlayerToBase(p);
+public void movePlayerOneBase(){
+	nextBase.addPlayerToBase(playerOnBase);
+	removePlayerFromBase();
 }
 
 public void removePlayerFromBase(){
@@ -33,6 +33,10 @@ public Base nextBase(){
 
 public void setNextBase(Base b){
 	nextBase = b;
+}
+
+public String toString(){
+	return "Player " + getPlayerOnBase() + " is on base";
 }
 
 }

@@ -1,20 +1,105 @@
 
 public class Field {
 
-private Base home = new Base();
-private Base one = new Base();
-private Base two = new Base();
-private Base three = new Base();
-private Base end = new Base();
-private Player tempPlayer;
+CurrentField currentField;
 
-public Field(){
-	home.setNextBase(one);
-	one.setNextBase(two);
-	two.setNextBase(three);
-	three.setNextBase(end);
+public Field(CurrentField cf){
+	currentField = cf;
 }
 
+public void newPlayerOnBases(int n, Player p){
+System.out.println("amount of bases to move " + n);
+if (n > 0){	
+	if(!(currentField.three.getPlayerOnBase() == null)){
+		playerOnThrid();
+	}
+	
+	if(!(currentField.two.getPlayerOnBase() == null)){
+		currentField.two.movePlayerOneBase();
+		if(n >= 2){
+			playerOnThrid();
+			}
+	}
+	
+	if(!(currentField.one.getPlayerOnBase() == null)){
+		switch (n){
+			case 1: {
+				currentField.one.movePlayerOneBase();
+				currentField.one.addPlayerToBase(p);
+				break;
+			}
+			
+			case 2: {
+				currentField.one.movePlayerOneBase();
+				currentField.two.movePlayerOneBase();
+
+				currentField.one.addPlayerToBase(p);
+				currentField.one.movePlayerOneBase();
+				break;
+			}
+			
+			case 3: {
+				currentField.one.movePlayerOneBase();
+				currentField.two.movePlayerOneBase();
+				playerOnThrid();
+
+				currentField.one.addPlayerToBase(p);
+				currentField.one.movePlayerOneBase();
+				currentField.two.movePlayerOneBase();
+				break;
+			}
+			
+			case 4:{
+				currentField.one.movePlayerOneBase();
+				currentField.two.movePlayerOneBase();
+				playerOnThrid();
+				
+				currentField.one.addPlayerToBase(p);
+				currentField.one.movePlayerOneBase();
+				currentField.two.movePlayerOneBase();
+				playerOnThrid();
+				break;
+			}
+		}
+	
+	}
+	else {
+		switch(n){
+		case 1: {
+			currentField.one.addPlayerToBase(p);
+			break;
+		}
+		case 2: {
+			currentField.one.addPlayerToBase(p);
+			currentField.one.movePlayerOneBase();
+			break;
+		}
+		case 3: {
+			currentField.one.addPlayerToBase(p);
+			currentField.one.movePlayerOneBase();
+			currentField.two.movePlayerOneBase();
+			break;
+		}
+		case 4: {
+			currentField.one.addPlayerToBase(p);
+			currentField.one.movePlayerOneBase();
+			currentField.two.movePlayerOneBase();
+			playerOnThrid();
+			break;
+		}
+		}
+	};
+}
+
+}
+
+private void playerOnThrid(){
+	currentField.three.movePlayerOneBase();
+	currentField.addScore();
+	System.out.println(currentField.home.getPlayerOnBase() + " has scored");
+}
+
+/*
 public void someoneIsRunning(int amountBases, Player p){
 	switch (amountBases){
 	case 1:{
@@ -35,6 +120,6 @@ public void someoneIsRunning(int amountBases, Player p){
 	default: {
 		System.out.println("No players moved to a base");
 	}
-	}
-}
+	}}
+*/
 }

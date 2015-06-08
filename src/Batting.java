@@ -41,14 +41,21 @@ public int pitch(){
 public int hit(){
 	hit = (int)(Math.random() *100);
 	if(hit <= player.getChanceOfSingle()){
+		currentBatting.setResult(1 + "");
 		return 1;
 	}
 	if(hit <= player.getChanceOfDouble()){
+		currentBatting.setResult(2 + "");
 		return 2;
 	}
 	if (hit <= player.getChanceOfTriple()){
+		currentBatting.setResult(3 + "");
 		return 3;
 	}
 	else return 4;
+}
+
+public Player getBatter(){
+	return currentBatting.getPlayer();
 }
 }
