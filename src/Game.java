@@ -14,6 +14,7 @@ Player p4 = new Player(.25f, "Mack");
 a.addPlayer(p);
 a.addPlayer(p2);
 b.addPlayer(p3);
+a.addPlayer(p4);
 
 Batting bat = new Batting();
 
