@@ -15,6 +15,16 @@ public CurrentField(){
 	three.setNextBase(home);
 }
 
+public void reset(){
+	score = 0;
+	outs = 0;
+	home.removePlayerFromBase();
+	one.removePlayerFromBase();
+	two.removePlayerFromBase();
+	three.removePlayerFromBase();
+}
+
+
 public int getScore() {
 	return score;
 }

@@ -8,10 +8,11 @@ private int outcome;
 private int strikes;
 private int hit;
 
-public void startBatting (CurrentBatting cb){
+public int startBatting (CurrentBatting cb){
 	currentBatting = cb;
 	pitcher = cb.getPitcher();
 	player = cb.getPlayer();
+	return atBat();
 }
 
 public int atBat(){

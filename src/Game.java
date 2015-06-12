@@ -1,45 +1,94 @@
 
 public class Game {
 	
-public static void main(String[] args){
+private CreateTeam ct;
+public Team[] teams;
+private Batting bat;
+private CurrentField cf;
+private Field f;
 
-Team a = new Team();
-Team b = new Team();
+private int amountOfBasesToMove;
+private Player currentBattingPlayer;
 
-//Player and team creation needs to be handled by another class linked to database
-Player p = new Player(.4f, "Bob");
-Player p2 = new Player(.3f, "Phil");
-Pitcher p3 = new Pitcher(.3f, "pitcher", 1);
-Player p4 = new Player(.25f, "Mack");
-a.addPlayer(p);
-a.addPlayer(p2);
-b.addPlayer(p3);
-a.addPlayer(p4);
+private int battingTeam;
+private int pitchingTeam;
+private boolean initOrder;
 
-Batting bat = new Batting();
+private int innings;
+	
+public Game(){
+	ct = new CreateTeam();
+	teams = ct.createTeams();
+	bat = new Batting();
+	cf = new CurrentField();
+	f = new Field(cf);
 
-//Every time a team switches from batting to fielding a new current batting needs
-//to be made
-CurrentBatting cb = new CurrentBatting(p3,p);
-CurrentBatting cb1 = new CurrentBatting(p3,p2);
-CurrentBatting cb2 = new CurrentBatting(p3,p4);
+	amountOfBasesToMove = 0;
+	currentBattingPlayer = null;
+	
+	battingTeam = 0;
+	pitchingTeam = 1;
+	initOrder = true;
+	
+	innings = 1;
+}
 
-CurrentField cf = new CurrentField();
-Field f = new Field(cf);
+public void switchTeams(){
+	if(initOrder == true){
+		battingTeam = 1;
+		pitchingTeam = 0;
+		initOrder = false;
+	}
+	else{
+		battingTeam = 0;
+		pitchingTeam = 1;
+		initOrder = true;
+	}
+}
 
-bat.startBatting(cb);
-f.newPlayerOnBases(bat.atBat(), bat.getBatter());
-System.out.println(cf);
+public void teamAtBat(){
+while(teams[battingTeam].getOuts() < 3){
+	currentBattingPlayer = teams[battingTeam].getNextPlayerAtBat();
+	CurrentBatting cb = new CurrentBatting(teams[pitchingTeam].getPitcher(), currentBattingPlayer );
+	amountOfBasesToMove = bat.startBatting(cb);
+	
+	if(amountOfBasesToMove > 0 ){
+		f.newPlayerOnBases(amountOfBasesToMove, currentBattingPlayer);
+		}
+	
+	else{
+		teams[battingTeam].addOneToOuts();
+		System.out.println("OUT HAS HAPPENED");
+			}
+	}
+	teams[battingTeam].addNumToScore(cf.getScore());
+	teams[battingTeam].setOutsToZero();
+	cf.reset();
+}
 
-bat.startBatting(cb1);
-f.newPlayerOnBases(bat.atBat(), bat.getBatter());
-System.out.println(cf);
+public void inning(){
+	teamAtBat();
+	System.out.println("NEW TEAM AT BAT");
+	System.out.println();
+	switchTeams();
+	teamAtBat();
+	switchTeams();
+	System.out.println("NEW TEAM AT BAT");
+	System.out.println();
+	innings++;
+}
 
-bat.startBatting(cb2);
-f.newPlayerOnBases(bat.atBat(), bat.getBatter());
-System.out.println(cf);
-
-System.out.println("the three batters scored " + cf.getScore());
+public void playGame(){
+while(innings < 9){
+	inning();
+	System.out.println("score at end of inning " + innings + " is: " +"\n"
+	+"Home Team: "+ teams[0].getScore() +"\n"+ "Away Team: "+ teams[1].getScore());
+}
+while(teams[0].getScore() == teams[1].getScore()){
+	inning();
+	System.out.println("score at end of inning " + innings + " is: " +"\n"
+	+"Home Team: "+ teams[0].getScore() +"\n" + "Away Team: "+ teams[1].getScore());
+}
 
 }
 }
