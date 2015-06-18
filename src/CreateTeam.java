@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -13,24 +14,29 @@ private String team_name_home = "";
 private String team_name_away = "";
 private int teamCounter = 0;
 private int pitcherCount = 1;
+private int battingLineup = 9;
 
 public Team[] createTeams(String team_name_home, String team_name_away){
 	
 	this.team_name_home = team_name_home;
 	this.team_name_away = team_name_away;
+	
+	home = createTeam(this.team_name_home);
+	away = createTeam(this.team_name_away);
 		
-	//Team[] teams = {createTeam(team_name_home), createTeam(team_name_away)};
+	Team[] teams = {home, away};
 	
 	return teams;
 	
 }
 
-public void createTeam(String team_name) {
+public Team createTeam(String team_name) {
 	// batting_players.append(([row["Name"].replace(" ", ""), row["Position"], float(row["H"]), float(row["IPR"]), float(row["O-Swing%"]), float(row["Z-Swing%"]), float(row["O-Contact%"]), float(row["Z-Contact%"]), float(row["1B%"]), float(row["2B%"]), float(row["3B%"]), float(row["HR%"]), float(row["FP"])]))
 
 	Team team = new Team();
 	team.setTeamName(team_name);
-	int count = 0;
+	int temp1 = 0;
+	int temp2 = 0;
 	
 	
 	try {
@@ -44,31 +50,36 @@ public void createTeam(String team_name) {
 		
 		Scanner scanner2 = new Scanner(reader_2);
 		
-		while (scanner.hasNext()){
+		while (scanner.hasNextLine() && temp1 < battingLineup){
 			
 			String[] playerData = new String[13];
 			
-			for(int x = 0; x < 12; x++){
+			for(int x = 0; x < 13; x++){
 				playerData[x] = scanner.next();
 				System.out.println(playerData[x]);
 			}
-			
 			Player player = new Player(playerData);
+			team.addPlayer(player);
+			temp1++;
 			
 		}
 		
-		while (scanner2.hasNext() && count <= pitcherCount){
+		while (scanner2.hasNextLine() && temp2 < pitcherCount){
 			
 			String[] pitcherData = new String[18];
 			
-			for(int x = 0; x < 17; x++){
-				pitcherData[x] = scanner.next();
+			// PlayerData for Pitchers is 0 across the board
+			String[] playerData = new String[13];
+			Arrays.fill(playerData, "0");
+			
+			for(int x = 0; x < 18; x++){
+				pitcherData[x] = scanner2.next();
 				System.out.println(pitcherData[x]);
 			}
-			String[] playerData = new String[13];
-			Pitcher pitcher = new Pitcher(playerData, pitcherData);
 			
-			count++;
+			Pitcher pitcher = new Pitcher(playerData, pitcherData);
+			team.addPlayer(pitcher);
+			temp2++;
 		}
 		
 	} catch (FileNotFoundException e) {
@@ -76,6 +87,6 @@ public void createTeam(String team_name) {
 		e.printStackTrace();
 	}
 	
-
+	return team;
 }
 }

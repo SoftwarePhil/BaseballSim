@@ -44,11 +44,11 @@ public Player getPlayer(int index){
 
 public Player getNextPlayerAtBat(){
 	playerAtBat++;
-	return players.get(playerAtBat % 7);
+	return players.get(playerAtBat % 8);
 }
 
 public Pitcher getPitcher(){
-	return (Pitcher) players.get(8);
+	return (Pitcher) players.get(9);
 }
 
 public String getTeamName() {

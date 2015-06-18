@@ -10,8 +10,7 @@ public static void main(String[] args){
 	
 	CreateTeam cr = new CreateTeam();
 	
-	cr.createTeam("Mets");
-	
+	cr.createTeams("Mets", "Yankees");
 }
 
 }
