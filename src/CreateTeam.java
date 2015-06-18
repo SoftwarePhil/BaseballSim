@@ -12,6 +12,7 @@ private Team[] teams;
 private String team_name_home = "";
 private String team_name_away = "";
 private int teamCounter = 0;
+private int pitcherCount = 1;
 
 public Team[] createTeams(String team_name_home, String team_name_away){
 	
@@ -29,12 +30,19 @@ public void createTeam(String team_name) {
 
 	Team team = new Team();
 	team.setTeamName(team_name);
+	int count = 0;
+	
 	
 	try {
 		BufferedReader reader = new BufferedReader(
 		        new FileReader(("team.txt")));
 		
+		BufferedReader reader_2 = new BufferedReader(
+		        new FileReader(("pitchers.txt")));
+		
 		Scanner scanner = new Scanner(reader);
+		
+		Scanner scanner2 = new Scanner(reader_2);
 		
 		while (scanner.hasNext()){
 			
@@ -47,6 +55,20 @@ public void createTeam(String team_name) {
 			
 			Player player = new Player(playerData);
 			
+		}
+		
+		while (scanner2.hasNext() && count <= pitcherCount){
+			
+			String[] pitcherData = new String[18];
+			
+			for(int x = 0; x < 17; x++){
+				pitcherData[x] = scanner.next();
+				System.out.println(pitcherData[x]);
+			}
+			String[] playerData = new String[13];
+			Pitcher pitcher = new Pitcher(playerData, pitcherData);
+			
+			count++;
 		}
 		
 	} catch (FileNotFoundException e) {
