@@ -31,6 +31,7 @@ public int startBatting (CurrentBatting cb){
 	chanceOfStrike = (pitcher.getZonePer() * (1-player.getoSwing())) + ((1 - pitcher.getZonePer())* player.getzSwing()* player.getzContact())
 				+ (pitcher.getZonePer() + player.getzSwing() * (1-player.getzContact()));
 	chanceOfFoul = (1-pitcher.getZonePer() + player.getoSwing() + player.getoContact() * FBPR + (pitcher.getZonePer() + player.getzSwing() + player.getzContact() + FBPR));
+	chanceOfHit = (1-pitcher.getZonePer() + player.getoSwing() + player.getoContact() * (1 - FBPR) + (pitcher.getZonePer() + player.getzSwing() + player.getzContact() + (1-FBPR)));
 	
 	return atBat();
 }
@@ -68,7 +69,7 @@ public int atBat(){
 } 
 
 public int pitch(){
-	int temp = (int)(player.getBattingAverage() * Math.random() * 100);
+	int temp = (int)Math.random() * 100;
 	if(temp < 20){
 		currentBatting.addStrike();
 		System.out.println("Strikes " + currentBatting.getStrikes() + " outcome " + temp);
