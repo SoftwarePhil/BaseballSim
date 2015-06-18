@@ -4,15 +4,53 @@ public class Batting {
 private CurrentBatting currentBatting;
 private Player player;
 private Pitcher pitcher;
+
 private int outcome;
 private int strikes;
 private int hit;
+
+private float chanceOfBall = 0;
+private float chanceOfStrike = 0;
+private float chanceOfHit = 0;
+private float chanceOfFoul = 0;
+private float pitchSpeed = 0;
+private float z = 0;
+
+private float avgIPR = 52.7f;
+private float maxZ  = 144.0f;
+
+private float FBPR = 0;
 
 public int startBatting (CurrentBatting cb){
 	currentBatting = cb;
 	pitcher = cb.getPitcher();
 	player = cb.getPlayer();
+	
+	FBPR = generateFBPR();
+	chanceOfBall = (1 - pitcher.getZonePer()) * (1 - player.getoSwing());
+	chanceOfStrike = (pitcher.getZonePer() * (1-player.getoSwing())) + ((1 - pitcher.getZonePer())* player.getzSwing()* player.getzContact())
+				+ (pitcher.getZonePer() + player.getzSwing() * (1-player.getzContact()));
+	chanceOfFoul = (1-pitcher.getZonePer() + player.getoSwing() + player.getoContact() * FBPR + (pitcher.getZonePer() + player.getzSwing() + player.getzContact() + FBPR));
+	
 	return atBat();
+}
+
+private float generateFBPR(){
+	z = -66.7f +(generatePitchSpeed()/player.getIPR());
+	
+	if(z < avgIPR){
+		z = (z/avgIPR)* 1/2;
+	}
+	else{
+		z = 1/2f + (((z-avgIPR)/(maxZ - avgIPR))*(.5f));
+	}
+	
+	return z;
+}
+
+private float generatePitchSpeed(){
+	
+	return 87.93f;
 }
 
 public int atBat(){
@@ -40,20 +78,7 @@ public int pitch(){
 }
 
 public int hit(){
-	hit = (int)(Math.random() *100);
-	if(hit <= player.getChanceOfSingle()){
-		currentBatting.setResult(1 + "");
-		return 1;
-	}
-	if(hit <= player.getChanceOfDouble()){
-		currentBatting.setResult(2 + "");
-		return 2;
-	}
-	if (hit <= player.getChanceOfTriple()){
-		currentBatting.setResult(3 + "");
-		return 3;
-	}
-	else return 4;
+	return 1;
 }
 
 public Player getBatter(){
