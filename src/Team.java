@@ -51,4 +51,12 @@ public Pitcher getPitcher(){
 	return (Pitcher) players.get(8);
 }
 
+public String getTeamName() {
+	return teamName;
+}
+
+public void setTeamName(String teamName) {
+	this.teamName = teamName;
+}
+
 }

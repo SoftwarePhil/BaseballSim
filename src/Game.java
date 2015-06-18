@@ -18,7 +18,7 @@ private int innings;
 	
 public Game(){
 	ct = new CreateTeam();
-	teams = ct.createTeams();
+	teams = ct.createTeams("Mets", "Yankees");
 	bat = new Batting();
 	cf = new CurrentField();
 	f = new Field(cf);

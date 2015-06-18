@@ -1,53 +1,59 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
+
 
 public class CreateTeam {
 
 private Team home = new Team();
 private Team away = new Team();
+private Team[] teams;
+private String team_name_home = "";
+private String team_name_away = "";
+private int teamCounter = 0;
 
-public Team[] createTeams(){
-	Player p1 = new Player(.4f, "Bob");
-	Player p2 = new Player(.3f, "Phil");
-	Player p3 = new Player(.25f, "Mack");
-	Player p4 = new Player(.32f, "Tango Tom");
-	Player p5 = new Player(.41f, "Joe");
-	Player p6 = new Player(.2f, "Billy");
-	Player p7 = new Player(.36f, "John");
-	Player p8 = new Player(.29f, "Josh");
-	Pitcher pitcherA = new Pitcher(.1f, "pitcherA", 1);
-	home.addPlayer(p1);
-	home.addPlayer(p2);
-	home.addPlayer(p3);
-	home.addPlayer(p4);
-	home.addPlayer(p5);
-	home.addPlayer(p6);
-	home.addPlayer(p7);
-	home.addPlayer(p8);
-	home.addPlayer(pitcherA);
-
-	Player p1b = new Player(.4f, "Bob");
-	Player p2b = new Player(.3f, "Phil");
-	Player p3b = new Player(.25f, "Mack");
-	Player p4b = new Player(.32f, "Tango Tom");
-	Player p5b = new Player(.41f, "Joe");
-	Player p6b = new Player(.2f, "Billy");
-	Player p7b = new Player(.36f, "John");
-	Player p8b = new Player(.29f, "Josh");
-	Pitcher pitcherB = new Pitcher(.1f, "pitcherA", 1);
-	away.addPlayer(p1b);
-	away.addPlayer(p2b);
-	away.addPlayer(p3b);
-	away.addPlayer(p4b);
-	away.addPlayer(p5b);
-	away.addPlayer(p6b);
-	away.addPlayer(p7b);
-	away.addPlayer(p8b);
-	away.addPlayer(pitcherB);
+public Team[] createTeams(String team_name_home, String team_name_away){
 	
-	Team[] teams = {home, away};
+	this.team_name_home = team_name_home;
+	this.team_name_away = team_name_away;
+		
+	//Team[] teams = {createTeam(team_name_home), createTeam(team_name_away)};
 	
 	return teams;
 	
 }
 
+public void createTeam(String team_name) {
+	// batting_players.append(([row["Name"].replace(" ", ""), row["Position"], float(row["H"]), float(row["IPR"]), float(row["O-Swing%"]), float(row["Z-Swing%"]), float(row["O-Contact%"]), float(row["Z-Contact%"]), float(row["1B%"]), float(row["2B%"]), float(row["3B%"]), float(row["HR%"]), float(row["FP"])]))
 
+	Team team = new Team();
+	team.setTeamName(team_name);
+	
+	try {
+		BufferedReader reader = new BufferedReader(
+		        new FileReader(("team.txt")));
+		
+		Scanner scanner = new Scanner(reader);
+		
+		while (scanner.hasNext()){
+			
+			String[] playerData = new String[13];
+			
+			for(int x = 0; x < 12; x++){
+				playerData[x] = scanner.next();
+				System.out.println(playerData[x]);
+			}
+			
+			Player player = new Player(playerData);
+			
+		}
+		
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+
+}
 }
