@@ -56,7 +56,6 @@ public Team createTeam(String team_name) {
 			
 			for(int x = 0; x < 13; x++){
 				playerData[x] = scanner.next();
-				System.out.println(playerData[x]);
 			}
 			Player player = new Player(playerData);
 			team.addPlayer(player);
@@ -74,7 +73,6 @@ public Team createTeam(String team_name) {
 			
 			for(int x = 0; x < 18; x++){
 				pitcherData[x] = scanner2.next();
-				System.out.println(pitcherData[x]);
 			}
 			
 			Pitcher pitcher = new Pitcher(playerData, pitcherData);

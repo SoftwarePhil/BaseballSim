@@ -21,6 +21,9 @@ private float chV;
 private float sfV;
 private float knV;
 
+private float baseSpeed;
+int temp = 0;
+
 
 //row["Name"].replace(" ", ""), float(row["G"]), "P", (float(row["Zone%"])), (float(row["FB%"])), (float(row["FBv"])), (float(row["SL%"])), (float(row["SLv"])), (float(row["CT%"])), (float(row["CTv"])), (float(row["CB%"])), (float(row["CBv"])), (float(row["CH%"])), (float(row["CHv"])), (float(row["SF%"])), (float(row["SFv"])), (float(row["KN%"])), (float(row["KNv"])))
 
@@ -44,6 +47,53 @@ public Pitcher(String[] playerData, String[] pitcherData) {
 	sfV = (Float.parseFloat(pitcherData[15]));
 	kn = (Float.parseFloat(pitcherData[16]));
 	knV = (Float.parseFloat(pitcherData[17]));
+	
+	fb = fb * 100;
+	sl = sl * 100;
+	ct = ct * 100;
+	cb = cb * 100;
+	ch = ch * 100;
+	sf = sf * 100;
+	kn = kn * 100;
+}
+
+public float getPitchType(){
+	int temp = (int)(Math.random() * 100);
+	
+	if(temp < fb){
+		return fbV;
+	}
+	else if(temp < fb + sl){
+		return slV;
+	}
+	else if(temp < fb + sl + ct){
+		return ctV;
+	}
+	else if(temp < fb + sl + ct + cb){
+		return cbV;
+	}
+	else if(temp < fb + sl + ct + cb + ch){
+		return chV;
+	}
+	else if(temp < fb + sl + ct + cb + ch + sf){
+		return sfV;
+	}
+	else {
+		return knV;
+	}
+}
+
+public float getPitchSpeed(){
+	baseSpeed = getPitchType();
+	temp = (int)(Math.random() * 10);
+	
+	if(temp <= 5){
+		return baseSpeed + (-1 * temp);
+	}
+	
+	else{
+		return baseSpeed +  temp;
+	}
 }
 
 public float getZonePer() {

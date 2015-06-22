@@ -12,7 +12,6 @@ private int balls;
 private float aSingle;
 private float aDouble;
 private float aTriple;
-private float aHomeRun;
 
 private float chanceOfBall = 0;
 private float chanceOfStrike = 0;
@@ -49,7 +48,6 @@ public int startBatting (CurrentBatting cb){
 	aSingle = player.getChanceSingle() * 100;
 	aDouble = player.getChanceDouble() * 100;
 	aTriple = player.getChanceTriple() * 100;
-	aHomeRun = player.getChanceHomerun() * 100;
 	
 	return atBat();
 }
@@ -67,14 +65,26 @@ private float generateFBPR(){
 	return z;
 }
 
+private void generateNewFBPR(){
+	FBPR = generateFBPR();
+	
+	chanceOfFoul = ((1-pitcher.getZonePer()) * player.getoSwing() * player.getoContact() * FBPR) + (pitcher.getZonePer() * player.getzSwing() * player.getzContact() * FBPR);
+	chanceOfHit = ((1-pitcher.getZonePer()) * player.getoSwing() * player.getoContact() * (1 - FBPR)) + (pitcher.getZonePer() * player.getzSwing() * player.getzContact() * (1-FBPR));
+	
+	chanceOfFoul = 1000 * chanceOfFoul;
+	chanceOfHit = 1000 * chanceOfHit;
+}
+
 private float generatePitchSpeed(){
 	
-	return 87.93f;
+	//return pitcher.getPitchSpeed();
+	return 87;
 }
 
 public int atBat(){
 	strikes = currentBatting.getStrikes();
 	while(strikes <= 2 && balls <= 3){
+		generateNewFBPR();
 		outcome = pitch();
 		
 		if(outcome == 0){
@@ -89,23 +99,25 @@ public int atBat(){
 
 public int pitch(){
 	int temp = (int)(Math.random() * 1000);
+	//ball
 	if(temp < chanceOfBall){
 		currentBatting.addBall();
 		balls = currentBatting.getBalls();
 		System.out.println("Ball " + balls + " outcome " + temp);
 		return 1;
 	}
+	//strike
 	else if(temp < chanceOfBall + chanceOfStrike){
 		currentBatting.addStrike();
 		strikes = currentBatting.getStrikes();
-		
 		System.out.println("Strike " + currentBatting.getStrikes() + " outcome " + temp);
 		return 1;
 	}
-	
+	//foul
 	else if (temp < chanceOfBall + chanceOfStrike + chanceOfFoul){
-		if(currentBatting.getFouls() < 2){
+		if(currentBatting.getStrikes() < 2){
 			currentBatting.addStrike();
+			strikes = currentBatting.getStrikes();
 			System.out.println("Foul that was strike " + currentBatting.getStrikes() + " outcome " + temp);
 			return 1;
 		}
@@ -115,8 +127,9 @@ public int pitch(){
 			return 1;
 		}
 	}
-	
+	//hit
 	else{
+		System.out.println("Ball was hit by " + player + " outcome = " + outcome);
 		return 0;
 	} 
 }

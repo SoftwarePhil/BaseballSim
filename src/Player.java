@@ -38,7 +38,7 @@ public Player(String[] playerData){
 
 
 public String toString(){
-	return name + " O swing " + oSwing + "  ::  Ocontact " + oContact ;
+	return name;
 }
 
 
