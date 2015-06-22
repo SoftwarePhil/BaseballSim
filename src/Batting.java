@@ -28,10 +28,10 @@ public int startBatting (CurrentBatting cb){
 	
 	FBPR = generateFBPR();
 	chanceOfBall = (1 - pitcher.getZonePer()) * (1 - player.getoSwing());
-	chanceOfStrike = (pitcher.getZonePer() * (1-player.getoSwing())) + ((1 - pitcher.getZonePer())* player.getzSwing()* player.getzContact())
-				+ (pitcher.getZonePer() * player.getzSwing() * (1-player.getzContact()));
-	chanceOfFoul = (1-pitcher.getZonePer() * player.getoSwing() * player.getoContact() * FBPR) + (pitcher.getZonePer() * player.getzSwing() * player.getzContact() * FBPR);
-	chanceOfHit = (1-pitcher.getZonePer() * player.getoSwing() * player.getoContact() * (1 - FBPR)) + (pitcher.getZonePer() * player.getzSwing() * player.getzContact() * (1-FBPR));
+	chanceOfStrike = (pitcher.getZonePer() * player.getzSwing() * (1-player.getzContact())) +
+			(pitcher.getZonePer() * (1-player.getzSwing())) + (((1-pitcher.getZonePer()) * player.getoSwing() * (1-player.getoContact())));
+	chanceOfFoul = ((1-pitcher.getZonePer()) * player.getoSwing() * player.getoContact() * FBPR) + (pitcher.getZonePer() * player.getzSwing() * player.getzContact() * FBPR);
+	chanceOfHit = ((1-pitcher.getZonePer()) * player.getoSwing() * player.getoContact() * (1 - FBPR)) + (pitcher.getZonePer() * player.getzSwing() * player.getzContact() * (1-FBPR));
 	
 	return 0; //atBat();
 }
@@ -69,9 +69,9 @@ public int atBat(){
 } 
 
 public int pitch(){
-	int temp = (int)Math.random() * 100;
-	if(temp < 20){
-		currentBatting.addStrike();
+	int temp = (int)Math.random() * 1000;
+	if(temp < chanceOfBall){
+		currentBatting.addBall();
 		System.out.println("Strikes " + currentBatting.getStrikes() + " outcome " + temp);
 		return 0;
 	}

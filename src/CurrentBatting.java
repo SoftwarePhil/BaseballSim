@@ -18,6 +18,10 @@ public void addStrike() {
 	strikes = strikes + 1;
 }
 
+public void addBall(){
+	balls = balls + 1;
+}
+
 public int getStrikes(){
 	return strikes;
 }
