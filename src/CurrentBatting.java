@@ -22,6 +22,10 @@ public void addBall(){
 	balls = balls + 1;
 }
 
+public void addFoul(){
+	fouls = fouls + 1;
+}
+
 public int getStrikes(){
 	return strikes;
 }
