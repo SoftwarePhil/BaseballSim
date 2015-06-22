@@ -17,7 +17,6 @@ private float chanceOfBall = 0;
 private float chanceOfStrike = 0;
 private float chanceOfHit = 0;
 private float chanceOfFoul = 0;
-private float pitchSpeed = 0;
 private float z = 0;
 
 private float avgIPR = 52.7f;
@@ -77,8 +76,7 @@ private void generateNewFBPR(){
 
 private float generatePitchSpeed(){
 	
-	//return pitcher.getPitchSpeed();
-	return 87;
+	return pitcher.getPitchSpeed();
 }
 
 public int atBat(){
@@ -129,7 +127,7 @@ public int pitch(){
 	}
 	//hit
 	else{
-		System.out.println("Ball was hit by " + player + " outcome = " + outcome);
+		System.out.println("Ball was hit by " + player + " outcome = " + temp);
 		return 0;
 	} 
 }
