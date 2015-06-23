@@ -17,6 +17,8 @@ private float zContact = 0;
 private float FP = 0;
 private String position = "";
 
+private String[] clonedData = new String[13];
+
 public Player(String[] playerData){
 	
 	//batting_players.append(([row["Name"].replace(" ", ""), row["Position"], float(row["H"]), float(row["IPR"]), float(row["O-Swing%"]), float(row["Z-Swing%"]), float(row["O-Contact%"]), float(row["Z-Contact%"]), float(row["1B%"]), float(row["2B%"]), float(row["3B%"]), float(row["HR%"]), float(row["FP"])]))
@@ -34,11 +36,13 @@ public Player(String[] playerData){
 	setChanceTriple(Float.parseFloat(playerData[10]));
 	setChanceHomerun(Float.parseFloat(playerData[11]));
 	setFP(Float.parseFloat(playerData[12]));
+	
+	clonedData = playerData;
 }
 
 
 public String toString(){
-	return name;
+	return name + " " + position;
 }
 
 
@@ -161,5 +165,8 @@ public void setPosition(String position) {
 	this.position = position;
 }
 
+public Player duplicatePlayer(Player temp){
+	return new Player(temp.clonedData);
+}
 
 }

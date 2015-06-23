@@ -1,10 +1,24 @@
+import java.util.Arrays;
+import java.util.Random;
+
 
 public class Field {
 
 CurrentField currentField;
+Random random = new Random();
 
 public Field(CurrentField cf){
 	currentField = cf;
+}
+
+
+public float pickFieldSquare(){
+	// nextInt(10) = [0-9] :: nextInt(11) = [0-10]
+	int squarePicked = random.nextInt(11);
+	
+	System.out.println("Ball Located in: " + squarePicked);
+	
+	return gridFieldArray[squarePicked];
 }
 
 public void newPlayerOnBases(int n, Player p){

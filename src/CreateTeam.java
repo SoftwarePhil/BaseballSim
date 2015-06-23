@@ -35,7 +35,6 @@ public Team createTeam(String team_name) {
 
 	Team team = new Team();
 	team.setTeamName(team_name);
-	int temp1 = 0;
 	int temp2 = 0;
 	
 	
@@ -50,7 +49,7 @@ public Team createTeam(String team_name) {
 		
 		Scanner scanner2 = new Scanner(reader_2);
 		
-		while (scanner.hasNextLine() && temp1 < battingLineup){
+		while (scanner.hasNextLine()){
 			
 			String[] playerData = new String[13];
 			
@@ -59,7 +58,6 @@ public Team createTeam(String team_name) {
 			}
 			Player player = new Player(playerData);
 			team.addPlayer(player);
-			temp1++;
 			
 		}
 		
@@ -79,6 +77,8 @@ public Team createTeam(String team_name) {
 			team.addPlayer(pitcher);
 			temp2++;
 		}
+		
+		team.configBattingRoster();
 		
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
