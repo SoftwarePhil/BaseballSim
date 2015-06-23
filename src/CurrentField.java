@@ -38,7 +38,7 @@ public CurrentField(){
 	// FieldSquare(boolean ball, int size, String position)	
 	for(int x = 0; x < rows; x++){
 		for(int y = 0; y < columns; y++){
-			gridFieldArray[x][y] = new FieldSquare(false, 0, null);
+			gridFieldArray[x][y] = new FieldSquare(false, null);
 		}
 	}
 	
