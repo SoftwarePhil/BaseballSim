@@ -13,6 +13,8 @@ protected Base one = new Base();
 protected Base two = new Base();
 protected Base three = new Base();
 
+public Ball ball = new Ball();
+
 /* Fielding Array (x marks plate, P is pitcher square)
  * ________________
  * | 0 | 1 |  2   |
@@ -35,22 +37,21 @@ public CurrentField(){
 	two.setNextBase(three);
 	three.setNextBase(home);
 	
-	// FieldSquare(boolean ball, int size, String position)	
 	for(int x = 0; x < rows; x++){
 		for(int y = 0; y < columns; y++){
 			gridFieldArray[x][y] = new FieldSquare(false, null);
 		}
 	}
 	
-	gridFieldArray[0][0].setKey("LF");
-	gridFieldArray[0][2].setKey("CF");
-	gridFieldArray[0][4].setKey("RF");
-	gridFieldArray[2][1].setKey("SS");
-	gridFieldArray[2][2].setKey("P");
-	gridFieldArray[2][3].setKey("2B");
-	gridFieldArray[3][0].setKey("3B");
-	gridFieldArray[3][2].setKey("C");
-	gridFieldArray[3][4].setKey("1B");
+	gridFieldArray[0][0].setKey("LF", 15);
+	gridFieldArray[0][2].setKey("CF", 15);
+	gridFieldArray[0][4].setKey("RF", 15);
+	gridFieldArray[2][1].setKey("SS", 8);
+	gridFieldArray[2][2].setKey("P", 8);
+	gridFieldArray[2][3].setKey("2B", 8);
+	gridFieldArray[3][0].setKey("3B", 8);
+	gridFieldArray[3][2].setKey("C", 8);
+	gridFieldArray[3][4].setKey("1B", 5);
 }
 
 public void reset(){
@@ -63,9 +64,27 @@ public void reset(){
 }
 
 public void start(Team fieldingTeam){
+	score = 0;
+	outs = 0;
+	home.removePlayerFromBase();
+	one.removePlayerFromBase();
+	two.removePlayerFromBase();
+	three.removePlayerFromBase();
 	this.fieldingTeam = fieldingTeam;
 	
-	
+	gridFieldArray[0][0].setFielder(fieldingTeam.getPlayerInFieldingPostion("LF"));
+	gridFieldArray[0][2].setFielder(fieldingTeam.getPlayerInFieldingPostion("CF"));
+	gridFieldArray[0][4].setFielder(fieldingTeam.getPlayerInFieldingPostion("RF"));
+	gridFieldArray[2][1].setFielder(fieldingTeam.getPlayerInFieldingPostion("SS"));
+	gridFieldArray[2][2].setFielder(fieldingTeam.getPlayerInFieldingPostion("P"));
+	gridFieldArray[2][3].setFielder(fieldingTeam.getPlayerInFieldingPostion("2B"));
+	gridFieldArray[3][0].setFielder(fieldingTeam.getPlayerInFieldingPostion("3B"));
+	gridFieldArray[3][2].setFielder(fieldingTeam.getPlayerInFieldingPostion("C"));
+	gridFieldArray[3][4].setFielder(fieldingTeam.getPlayerInFieldingPostion("1B"));
+}
+
+public void putBallIntoRandomSquare(){
+	ball.setPostion((int)Math.random()*4, (int)Math.random()*5);
 }
 
 public int getScore() {

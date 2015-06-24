@@ -12,17 +12,11 @@ public Field(CurrentField cf){
 }
 
 
-public float pickFieldSquare(){
-	// nextInt(10) = [0-9] :: nextInt(11) = [0-10]
-	int squarePicked = random.nextInt(11);
-	
-	System.out.println("Ball Located in: " + squarePicked);
-	
-	return gridFieldArray[squarePicked];
-}
-
 public void newPlayerOnBases(int n, Player p){
 System.out.println("amount of bases to move " + n);
+
+currentField.putBallIntoRandomSquare();
+
 if (n > 0){	
 	if(!(currentField.three.getPlayerOnBase() == null)){
 		playerOnThrid();
@@ -104,7 +98,10 @@ if (n > 0){
 		}
 	};
 }
+}
 
+public void checkIfPlayerIsOut(){
+	
 }
 
 private void playerOnThrid(){
@@ -112,28 +109,4 @@ private void playerOnThrid(){
 	currentField.addScore();
 	System.out.println(currentField.home.getPlayerOnBase() + " has scored");
 }
-
-/*
-public void someoneIsRunning(int amountBases, Player p){
-	switch (amountBases){
-	case 1:{
-		if(one.getPlayerOnBase() == null){
-		one.addPlayerToBase(p);
-		System.out.println(p + " is on first base!");
-		}
-		else {
-		tempPlayer = one.getPlayerOnBase();
-		one.movePlayerOneBase(tempPlayer);	
-		System.out.println(tempPlayer + " is on second base!");
-		one.addPlayerToBase(p);
-		System.out.println(p + " is on first base!");
-		}
-	break;
-	}
-	
-	default: {
-		System.out.println("No players moved to a base");
-	}
-	}}
-*/
 }

@@ -45,6 +45,16 @@ public void configFieldingRoster(){
 	}
 }
 
+public Player getPlayerInFieldingPostion(String pos){
+	for(int x = 0; x < fieldingRoster.size(); x++){
+		if(fieldingRoster.get(x).getPosition().equals(pos)){
+				return fieldingRoster.get(x);
+			}
+		}
+	
+	return null;
+}
+
 public Player fillPlayerSpot(){
 	
 	boolean playerOnList = false;

@@ -3,7 +3,7 @@ public class FieldSquare {
 	
 private boolean hasBall;
 private String key;
-private float[] playerSpace;
+private int[] playerSpace;
 private Player fielder;
 
 public FieldSquare(){
@@ -12,11 +12,11 @@ public FieldSquare(){
 
 public FieldSquare(boolean ball, String position){
 	setHasBall(ball);
-	setKey(position);
+	setKey(position, 10);
 }
 
 public void setSize(int size){
-	playerSpace = new float[size];
+	playerSpace = new int[size];
 }
 
 public boolean getHasBall() {
@@ -31,8 +31,9 @@ public String getKey() {
 	return key;
 }
 
-public void setKey(String key) {
+public void setKey(String key, int size) {
 	this.key = key;
+	playerSpace = new int[size];
 }
 
 public Player getFielder() {
@@ -41,6 +42,10 @@ public Player getFielder() {
 
 public void setFielder(Player fielder) {
 	this.fielder = fielder;
+	for(int i = 0; i < playerSpace.length; i++){
+		playerSpace[i] = (int)(fielder.getFP()*100) - i;
+	
+	}
 }
 
 }
