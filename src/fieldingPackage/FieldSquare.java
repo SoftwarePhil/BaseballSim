@@ -39,7 +39,6 @@ public String getKey() {
 public void setKey(String key, int size) {
 	this.key = key;
 	setSize(size);
-	Arrays.fill(playerSpace, 0);
 }
 
 public Player getFielder() {
@@ -49,8 +48,8 @@ public Player getFielder() {
 public void setFielder(Player fielder) {
 	this.fielder = fielder;
 	for(int i = 0; i < playerSpace.length; i++){
-		//playerSpace[i] = (int)(fielder.getFP()*100) - i;
-		playerSpace[i] = 90;
+		playerSpace[i] = (int)(fielder.getFP()*100) - i;
+		//playerSpace[i] = 60;
 	
 	}
 }

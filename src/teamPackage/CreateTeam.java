@@ -80,6 +80,7 @@ public Team createTeam(String team_name) {
 		}
 		
 		team.configBattingRoster();
+		team.configFieldingRoster();
 		
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block

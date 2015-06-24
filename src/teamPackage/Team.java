@@ -53,6 +53,7 @@ public Player getPlayerInFieldingPostion(String pos){
 			}
 		}
 	
+	System.out.println("null player found this is very bad " + pos);
 	return null;
 }
 
