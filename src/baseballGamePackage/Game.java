@@ -1,3 +1,12 @@
+package baseballGamePackage;
+import battingPackage.Batting;
+import battingPackage.CurrentBatting;
+import teamPackage.CreateTeam;
+import teamPackage.Player;
+import teamPackage.Team;
+import feildingPackage.CurrentField;
+import feildingPackage.Field;
+
 
 public class Game {
 	
@@ -15,6 +24,7 @@ private int pitchingTeam;
 private boolean initOrder;
 
 private int innings;
+private int outsToBeAdded;
 	
 public Game(){
 	ct = new CreateTeam();
@@ -53,7 +63,11 @@ while(teams[battingTeam].getOuts() < 3){
 	amountOfBasesToMove = bat.startBatting(cb);
 	
 	if(amountOfBasesToMove > 0 ){
-		f.newPlayerOnBases(amountOfBasesToMove, currentBattingPlayer);
+		outsToBeAdded = f.newPlayerOnBases(amountOfBasesToMove, currentBattingPlayer, teams[battingTeam].getOuts());
+		if(outsToBeAdded > 1){
+			teams[battingTeam].addNumToOuts(outsToBeAdded);
+			System.out.println("The Ball has been caught");
+			}
 		}
 	
 	else{

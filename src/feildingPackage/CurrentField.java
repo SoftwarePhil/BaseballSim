@@ -1,4 +1,7 @@
+package feildingPackage;
 import java.util.Arrays;
+
+import teamPackage.Team;
 
 
 public class CurrentField {
@@ -87,6 +90,10 @@ public void putBallIntoRandomSquare(){
 	ball.setPostion((int)Math.random()*4, (int)Math.random()*5);
 }
 
+public boolean wasBallCaught(int x, int y){
+	return gridFieldArray[x][y].wasBallCaught();
+}
+
 public int getScore() {
 	return score;
 }
@@ -96,7 +103,7 @@ public void addScore() {
 public int getOuts() {
 	return outs;
 }
-public void addOuts() {
+public void addOneToOuts() {
 	outs = outs + 1;
 }
 public String toString(){

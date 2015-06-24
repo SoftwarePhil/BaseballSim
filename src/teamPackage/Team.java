@@ -1,3 +1,4 @@
+package teamPackage;
 import java.util.ArrayList;
 
 
@@ -112,6 +113,10 @@ public void addNumToScore(int n){
 
 public void addOneToOuts(){
 	outs++;
+}
+
+public void addNumToOuts(int o){
+	outs = outs + o;  
 }
 
 public void setOutsToZero(){

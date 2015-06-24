@@ -1,3 +1,6 @@
+package feildingPackage;
+import teamPackage.Player;
+
 
 public class FieldSquare {
 	
@@ -46,6 +49,15 @@ public void setFielder(Player fielder) {
 		playerSpace[i] = (int)(fielder.getFP()*100) - i;
 	
 	}
+}
+
+public boolean wasBallCaught(){
+	int temp = (int)(Math.random() * (playerSpace.length-1));
+	int temp2 = (int)(Math.random() * 100);
+	if(temp2 > (100 - playerSpace[temp])){
+		return true;
+	}
+	else return false;
 }
 
 }
