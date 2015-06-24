@@ -57,6 +57,7 @@ public void switchTeams(){
 }
 
 public void teamAtBat(){
+cf.start(teams[pitchingTeam]);
 while(teams[battingTeam].getOuts() < 3){
 	currentBattingPlayer = teams[battingTeam].getNextPlayerAtBat();
 	CurrentBatting cb = new CurrentBatting(teams[pitchingTeam].getPitcher(), currentBattingPlayer );
@@ -64,9 +65,8 @@ while(teams[battingTeam].getOuts() < 3){
 	
 	if(amountOfBasesToMove > 0 ){
 		outsToBeAdded = f.newPlayerOnBases(amountOfBasesToMove, currentBattingPlayer, teams[battingTeam].getOuts());
-		if(outsToBeAdded > 1){
+		if(outsToBeAdded > 0){
 			teams[battingTeam].addNumToOuts(outsToBeAdded);
-			System.out.println("The Ball has been caught");
 			}
 		}
 	

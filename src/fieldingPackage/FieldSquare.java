@@ -1,4 +1,6 @@
 package fieldingPackage;
+import java.util.Arrays;
+
 import teamPackage.Player;
 
 
@@ -36,7 +38,8 @@ public String getKey() {
 
 public void setKey(String key, int size) {
 	this.key = key;
-	playerSpace = new int[size];
+	setSize(size);
+	Arrays.fill(playerSpace, 0);
 }
 
 public Player getFielder() {
@@ -46,7 +49,8 @@ public Player getFielder() {
 public void setFielder(Player fielder) {
 	this.fielder = fielder;
 	for(int i = 0; i < playerSpace.length; i++){
-		playerSpace[i] = (int)(fielder.getFP()*100) - i;
+		//playerSpace[i] = (int)(fielder.getFP()*100) - i;
+		playerSpace[i] = 90;
 	
 	}
 }
@@ -54,7 +58,8 @@ public void setFielder(Player fielder) {
 public boolean wasBallCaught(){
 	int temp = (int)(Math.random() * (playerSpace.length-1));
 	int temp2 = (int)(Math.random() * 100);
-	if(temp2 > (100 - playerSpace[temp])){
+	if(!(temp2 > (100 - playerSpace[temp]))){
+		System.out.println("BALL HAS BEEN CAUGHT OUT");
 		return true;
 	}
 	else return false;

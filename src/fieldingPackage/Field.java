@@ -16,10 +16,10 @@ public Field(CurrentField cf){
 
 
 public int newPlayerOnBases(int n, Player p, int numOfOuts){
-System.out.println("amount of bases to move " + n);
-
+currentField.resetOuts();
 currentField.putBallIntoRandomSquare();
 if(!(checkIfBallIsCaught())){
+	System.out.println("amount of bases to move " + n);
 	if (n > 0){	
 		if(!(currentField.three.getPlayerOnBase() == null)){
 			playerOnThrid();
@@ -101,12 +101,12 @@ if(!(checkIfBallIsCaught())){
 			}
 		};
 	}
-	else {
+	
+}
+else {
 		currentField.addOneToOuts();
 	}
-}
-
-return currentField.getOuts() + numOfOuts;
+return currentField.getOuts();
 
 }
 

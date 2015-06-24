@@ -59,11 +59,15 @@ public CurrentField(){
 
 public void reset(){
 	score = 0;
-	outs = 0;
+	resetOuts();
 	home.removePlayerFromBase();
 	one.removePlayerFromBase();
 	two.removePlayerFromBase();
 	three.removePlayerFromBase();
+}
+
+public void resetOuts(){
+	outs = 0;
 }
 
 public void start(Team fieldingTeam){
