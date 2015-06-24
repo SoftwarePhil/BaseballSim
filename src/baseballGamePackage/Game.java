@@ -4,8 +4,8 @@ import battingPackage.CurrentBatting;
 import teamPackage.CreateTeam;
 import teamPackage.Player;
 import teamPackage.Team;
-import feildingPackage.CurrentField;
-import feildingPackage.Field;
+import fieldingPackage.CurrentField;
+import fieldingPackage.Field;
 
 
 public class Game {

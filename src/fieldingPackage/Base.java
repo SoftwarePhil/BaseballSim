@@ -1,4 +1,4 @@
-package feildingPackage;
+package fieldingPackage;
 import teamPackage.Player;
 
 
