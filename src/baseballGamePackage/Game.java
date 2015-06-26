@@ -26,9 +26,9 @@ private boolean initOrder;
 private int innings;
 private int outsToBeAdded;
 	
-public Game(){
+public Game(String home, String away){
 	ct = new CreateTeam();
-	teams = ct.createTeams("Mets", "Yankees");
+	teams = ct.createTeams(home, away);
 	bat = new Batting();
 	cf = new CurrentField();
 	f = new Field(cf);
