@@ -11,19 +11,19 @@ public class CreateTeam {
 private Team home = new Team();
 private Team away = new Team();
 private Team[] teams;
-private String team_name_home = "";
-private String team_name_away = "";
+private String teamNameHome = "";
+private String teamNameAway = "";
 private int teamCounter = 0;
 private int pitcherCount = 1;
 private int battingLineup = 9;
 
 public Team[] createTeams(String team_name_home, String team_name_away){
 	
-	this.team_name_home = team_name_home;
-	this.team_name_away = team_name_away;
+	this.teamNameHome = team_name_home;
+	this.teamNameAway = team_name_away;
 	
-	home = createTeam(this.team_name_home);
-	away = createTeam(this.team_name_away);
+	home = createTeam(this.teamNameHome);
+	away = createTeam(this.teamNameAway);
 		
 	Team[] teams = {home, away};
 	
