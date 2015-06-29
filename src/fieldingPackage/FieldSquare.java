@@ -48,8 +48,8 @@ public Player getFielder() {
 public void setFielder(Player fielder) {
 	this.fielder = fielder;
 	for(int i = 0; i < playerSpace.length; i++){
-		if(i*3 < 50){
-		playerSpace[i] = (int)(fielder.getFP()*100) - (i*5);
+		if(i < 50){
+		playerSpace[i] = (int)(fielder.getFP()*100) - (i);
 		}
 		else {
 			playerSpace[i] = 60;

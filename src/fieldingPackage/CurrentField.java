@@ -91,7 +91,7 @@ public void start(Team fieldingTeam){
 }
 
 public void putBallIntoRandomSquare(){
-	ball.setPostion((int)Math.random()*4, (int)Math.random()*5);
+	ball.setPostion((int)(Math.random()*4), (int)(Math.random()*5));
 }
 
 public boolean wasBallCaught(int x, int y){
