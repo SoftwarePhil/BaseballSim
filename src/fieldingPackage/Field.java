@@ -159,7 +159,13 @@ public boolean checkIfPlayerIsSafe(int baseNum){
 	//gridFieldArray[3][0].setKey("3B", 8);
 	//gridFieldArray[3][4].setKey("1B", 5);
 	//gridFieldArray[3][2].setKey("C", 8);
+int rand = (int)(Math.random()*100);
+if(rand > 60){
+	return true;
+}
+else return false;
 	
+	/*	currentField.putBallIntoRandomSquare();
 	int[] basePos = new int[2];
 	switch (baseNum){
 	case 1:{
@@ -184,13 +190,14 @@ public boolean checkIfPlayerIsSafe(int baseNum){
 	}
 	}
 	temp = currentField.ball.getPostion(); 
-	//System.out.println("Base num " + basePos[0] +" : "+ basePos[1] + " Ball pos " + temp[0] +" :" + temp[1]);
+	System.out.println("Base num " + basePos[0] +" : "+ basePos[1] + " Ball pos " + temp[0] +" :" + temp[1]);
 	if(temp[0] == basePos[0] && temp[1] == basePos[1] ){
 		System.out.println("Ball and player are on same base");
 		return isBallCaught(temp[0], temp[1]);
 	}
 	
 	return false;
+	*/
 }
 
 public boolean isPlayerOutOnBase(int baseNum, boolean ballCaught){
@@ -231,6 +238,9 @@ public boolean isPlayerOutOnBase(int baseNum, boolean ballCaught){
 				return true;
 			}
 			else return false;
+		}
+		default: {
+			System.out.println("SOMETHING WENT WRONG");
 		}
 	}
 	
