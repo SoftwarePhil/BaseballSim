@@ -128,7 +128,6 @@ if(!(checkIfBallIsCaught())){
 			}
 		};
 	}
-	
 }
 else {
 		currentField.addOneToOuts();
@@ -200,9 +199,10 @@ else return false;
 	*/
 }
 
-public boolean isPlayerOutOnBase(int baseNum, boolean ballCaught){
+public boolean isPlayerOutOnBase(int baseNum, boolean b){
+	boolean ballCaught = checkIfPlayerIsSafe(baseNum);
 	if((ballCaught)){
-	System.out.println("Player did not make it to base safely, he will get out");
+	System.out.println("Player has may get out on base");
 	switch (baseNum){
 		case 1: {
 			if(!checkIfPlayerIsSafe(1)){
