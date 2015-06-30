@@ -11,6 +11,7 @@ private int strikes = 0;
 private int balls = 0;
 private int fouls = 0;
 private String result;
+private boolean isBall = false;
 
 public CurrentBatting(Pitcher p, Player py){
 	pitcher = p;
@@ -64,5 +65,15 @@ public String getResult() {
 
 public void setResult(String result) {
 	this.result = result;
+}
+
+
+public boolean getIsBall() {
+	return isBall;
+}
+
+
+public void setIsBall(boolean isBall) {
+	this.isBall = isBall;
 }
 }

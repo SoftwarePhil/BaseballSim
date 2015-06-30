@@ -94,6 +94,7 @@ public int atBat(){
 		}
 	}
 	if(currentBatting.getBalls() == 4){
+		currentBatting.setIsBall(true);
 		return 1;
 	}
 	return 0;

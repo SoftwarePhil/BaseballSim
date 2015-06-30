@@ -63,8 +63,9 @@ while(teams[battingTeam].getOuts() < 3){
 	CurrentBatting cb = new CurrentBatting(teams[pitchingTeam].getPitcher(), currentBattingPlayer );
 	amountOfBasesToMove = bat.startBatting(cb);
 	
+	
 	if(amountOfBasesToMove > 0 ){
-		outsToBeAdded = f.newPlayerOnBases(amountOfBasesToMove, currentBattingPlayer, teams[battingTeam].getOuts());
+		outsToBeAdded = f.newPlayerOnBases(amountOfBasesToMove, currentBattingPlayer, teams[battingTeam].getOuts(), cb.getIsBall());
 		if(outsToBeAdded > 0){
 			teams[battingTeam].addNumToOuts(outsToBeAdded);
 			}
