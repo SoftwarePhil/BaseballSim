@@ -65,7 +65,7 @@ while(teams[battingTeam].getOuts() < 3){
 	
 	
 	if(amountOfBasesToMove > 0 ){
-		outsToBeAdded = f.newPlayerOnBases(amountOfBasesToMove, currentBattingPlayer, teams[battingTeam].getOuts(), cb.getIsBall());
+		outsToBeAdded = f.newPlayerOnBases(amountOfBasesToMove, currentBattingPlayer, teams[battingTeam].getOuts(), cb.getHomerunOrWalk());
 		if(outsToBeAdded > 0){
 			teams[battingTeam].addNumToOuts(outsToBeAdded);
 			}

@@ -94,7 +94,7 @@ public int atBat(){
 		}
 	}
 	if(currentBatting.getBalls() == 4){
-		currentBatting.setIsBall(true);
+		currentBatting.setHomerunOrWalk("walk");
 		return 1;
 	}
 	return 0;
@@ -149,6 +149,7 @@ public int hit(){
 		return 3;
 	}
 	else {
+		currentBatting.setHomerunOrWalk("homerun");
 		return 4;
 	}
 }

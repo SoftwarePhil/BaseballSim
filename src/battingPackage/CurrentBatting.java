@@ -10,8 +10,7 @@ private Player player;
 private int strikes = 0;
 private int balls = 0;
 private int fouls = 0;
-private String result;
-private boolean isBall = false;
+private String homerunOrWalk = "";
 
 public CurrentBatting(Pitcher p, Player py){
 	pitcher = p;
@@ -59,21 +58,12 @@ public Pitcher getPitcher() {
 	return pitcher;
 }
 
-public String getResult() {
-	return result;
-}
-
-public void setResult(String result) {
-	this.result = result;
+public String getHomerunOrWalk() {
+	return homerunOrWalk;
 }
 
 
-public boolean getIsBall() {
-	return isBall;
-}
-
-
-public void setIsBall(boolean isBall) {
-	this.isBall = isBall;
+public void setHomerunOrWalk(String homerunOrWalk) {
+	this.homerunOrWalk = homerunOrWalk;
 }
 }

@@ -10,22 +10,30 @@ public class Field {
 CurrentField currentField;
 Random random = new Random();
 int[] temp;
+int currentAmountOfOuts = 0;
 
 public Field(CurrentField cf){
 	currentField = cf;
 }
 
 
-public int newPlayerOnBases(int n, Player p, int numOfOuts, boolean isWalk){
+public int newPlayerOnBases(int n, Player p, int numOfOuts, String walkOrHomeRun){
 currentField.resetOuts();
-if(isWalk){
+currentAmountOfOuts = numOfOuts;
+if(walkOrHomeRun.equals("walk")){
 	newPlayerOnBasesWalk(p);
 	return 0;
+}
+
+else if(walkOrHomeRun.equals("homerun")){
+	newPlayerOnBasesHomerun(p);
+	return currentField.getScore();
 }
 
 else{
 currentField.putBallIntoRandomSquare();
 if(!(checkIfBallIsCaught())){
+	try{
 	System.out.println("amount of bases to move " + n);
 	if (n > 0){	
 		if(!(currentField.three.getPlayerOnBase() == null)){
@@ -82,7 +90,6 @@ if(!(checkIfBallIsCaught())){
 					break;
 				}
 			}
-		
 		}
 		else {
 			switch(n){
@@ -106,6 +113,11 @@ if(!(checkIfBallIsCaught())){
 		};
 	}
 }
+catch(Exception e){
+	System.out.println("three outs have happened! ending fielding");
+	}
+}
+
 else {
 		currentField.addOneToOuts();
 	}
@@ -113,12 +125,12 @@ return currentField.getOuts();
 }
 }
 
-private void moveOneBase(Player p){
+private void moveOneBase(Player p) throws Exception{
 	currentField.one.addPlayerToBase(p);
 	isPlayerOutOnBase(1, checkIfPlayerIsSafe(1));
 }
 
-private void moveTwoBases(Player p){
+private void moveTwoBases(Player p) throws Exception{
 	currentField.one.addPlayerToBase(p);
 	boolean b = isPlayerOutOnBase(1, checkIfPlayerIsSafe(1));
 	
@@ -128,7 +140,7 @@ private void moveTwoBases(Player p){
 		}
 }
 
-private void movePlayerThreeBases(Player p){
+private void movePlayerThreeBases(Player p) throws Exception{
 	currentField.one.addPlayerToBase(p);
 	boolean b = isPlayerOutOnBase(1, checkIfPlayerIsSafe(1));
 	
@@ -147,13 +159,16 @@ private void movePlayerFourBases(Player p){
 	currentField.one.addPlayerToBase(p);
 	currentField.two.movePlayerOneBase();
 		
+	if(currentField.three.getPlayerOnBase() == null){
+	}
+	else{
 	currentField.three.movePlayerOneBase();
 	currentField.addScore();
 	System.out.println(currentField.home.getPlayerOnBase() + " has scored");
-
+	}
 }
 
-public boolean checkIfBallIsCaught(){
+private boolean checkIfBallIsCaught(){
 	//gridFieldArray[0][0].setKey("LF", 15);
 	//gridFieldArray[0][2].setKey("CF", 15);
 	//gridFieldArray[0][4].setKey("RF", 15);
@@ -171,7 +186,7 @@ private boolean isBallCaught(int x, int y){
 	return currentField.wasBallCaught(x, y);
 }
 
-public boolean checkIfPlayerIsSafe(int baseNum){
+private boolean checkIfPlayerIsSafe(int baseNum){
 	//gridFieldArray[2][3].setKey("2B", 8);
 	//gridFieldArray[3][0].setKey("3B", 8);
 	//gridFieldArray[3][4].setKey("1B", 5);
@@ -218,10 +233,14 @@ else return false;
 	*/
 }
 
-public boolean isPlayerOutOnBase(int baseNum, boolean b){
+private boolean isPlayerOutOnBase(int baseNum, boolean b) throws Exception{
+try{
+	if(currentAmountOfOuts + currentField.getOuts() >= 3){
+		throw new Exception("3 outs have happened");
+	}
 	boolean ballCaught = checkIfPlayerIsSafe(baseNum);
 	if((ballCaught)){
-	System.out.println("Player has may get out on base");
+	System.out.println("Player may get out on base");
 	switch (baseNum){
 		case 1: {
 			if(!checkIfPlayerIsSafe(1)){
@@ -267,40 +286,85 @@ public boolean isPlayerOutOnBase(int baseNum, boolean b){
 	System.out.println("Player made it to base safely!" + ballCaught);
 	return false;
 }
+	finally{
+	}
+}
+
 private void playerOnThrid(){
 	if(currentField.three.getPlayerOnBase() == null){
 	}
 	else{
+		try{
 		boolean test = isPlayerOutOnBase(4, checkIfPlayerIsSafe(4));
+		
 		if(!test){
 		currentField.three.movePlayerOneBase();
 		currentField.addScore();
 		System.out.println(currentField.home.getPlayerOnBase() + " has scored");
 		}
+		}
+		catch(Exception e){
+			System.out.println("3 outs have happened on the field");
+		}
 	}
 }
 
-private void newPlayerOnBasesWalk(Player p){
-currentField.resetOuts();
-	
+private void newPlayerOnBasesWalk(Player p){	
 System.out.println("amount of bases to move is 1, walk ");
 		if(!(currentField.three.getPlayerOnBase() == null)){
-			currentField.three.movePlayerOneBase();
-			currentField.addScore();
-			System.out.println(currentField.home.getPlayerOnBase() + " has scored");
-		}
-		
+			if(currentField.three.getPlayerOnBase() == null){
+			}
+			else{
+				currentField.three.movePlayerOneBase();
+				currentField.addScore();
+				System.out.println(currentField.home.getPlayerOnBase() + " has scored");
+				}
+			}
 		if(!(currentField.two.getPlayerOnBase() == null)){
 			currentField.two.movePlayerOneBase();
 		}
 		
 		if(!(currentField.one.getPlayerOnBase() == null)){			
 			currentField.one.movePlayerOneBase();
-		
 		}
+		
 		else {
 			currentField.one.addPlayerToBase(p);
 		}
 }
 
+public void newPlayerOnBasesHomerun(Player p){
+	System.out.println("Homerun!!");
+	
+	if(!(currentField.three.getPlayerOnBase() == null)){
+		currentField.three.movePlayerOneBase();
+		currentField.addScore();
+		System.out.println(currentField.home.getPlayerOnBase() + " has scored");
+	}
+	
+	if(!(currentField.two.getPlayerOnBase() == null)){
+		currentField.two.movePlayerOneBase();
+		currentField.three.movePlayerOneBase();
+		currentField.addScore();
+		System.out.println(currentField.home.getPlayerOnBase() + " has scored");
+	}
+	
+	if(!(currentField.one.getPlayerOnBase() == null)){
+		currentField.one.movePlayerOneBase();
+		currentField.two.movePlayerOneBase();
+		currentField.three.movePlayerOneBase();
+		currentField.addScore();
+		System.out.println(currentField.home.getPlayerOnBase() + " has scored");
+	}
+	
+	currentField.one.addPlayerToBase(p);
+	currentField.one.movePlayerOneBase();
+	currentField.two.movePlayerOneBase();
+	currentField.three.movePlayerOneBase();
+	currentField.addScore();
+	System.out.println(currentField.home.getPlayerOnBase() + " has scored");
 }
+		
+
+}
+
