@@ -1,7 +1,5 @@
 package fieldingPackage;
-import java.util.Arrays;
 import java.util.Random;
-
 import teamPackage.Player;
 
 
@@ -42,7 +40,7 @@ if(!(checkIfBallIsCaught())){
 		
 		if(!(currentField.two.getPlayerOnBase() == null)){
 			currentField.two.movePlayerOneBase();
-			isPlayerOutOnBase(3, checkIfPlayerIsSafe(3));
+			isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3));
 			if(n >= 2){
 				playerOnThrid();
 				}
@@ -52,7 +50,7 @@ if(!(checkIfBallIsCaught())){
 			switch (n){
 				case 1: {
 					currentField.one.movePlayerOneBase();
-					isPlayerOutOnBase(2, checkIfPlayerIsSafe(2));
+					isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2));
 					
 					moveOneBase(p);
 					break;
@@ -60,9 +58,9 @@ if(!(checkIfBallIsCaught())){
 				
 				case 2: {
 					currentField.one.movePlayerOneBase();
-					isPlayerOutOnBase(2, checkIfPlayerIsSafe(2));
+					isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2));
 					currentField.two.movePlayerOneBase();
-					isPlayerOutOnBase(3, checkIfPlayerIsSafe(3));
+					isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3));
 	
 					moveTwoBases(p);
 					break;
@@ -70,25 +68,25 @@ if(!(checkIfBallIsCaught())){
 				
 				case 3: {
 					currentField.one.movePlayerOneBase();
-					isPlayerOutOnBase(2, checkIfPlayerIsSafe(2));
+					isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2));
 					currentField.two.movePlayerOneBase();
-					isPlayerOutOnBase(3, checkIfPlayerIsSafe(3));
+					isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3));
 					playerOnThrid();
 	
 					movePlayerThreeBases(p);
 					break;
 				}
 				
-				case 4:{
+				/*case 4:{
 					currentField.one.movePlayerOneBase();
-					isPlayerOutOnBase(2, checkIfPlayerIsSafe(2));
+					isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2));
 					currentField.two.movePlayerOneBase();
-					isPlayerOutOnBase(3, checkIfPlayerIsSafe(3));
+					isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3));
 					playerOnThrid();
 					
 					movePlayerFourBases(p);
 					break;
-				}
+				}*/
 			}
 		}
 		else {
@@ -105,10 +103,10 @@ if(!(checkIfBallIsCaught())){
 				movePlayerThreeBases(p);
 				break;
 			}
-			case 4: {
+			/*case 4: {
 				movePlayerFourBases(p);
 				break;
-			}
+			}*/
 			}
 		};
 	}
@@ -127,31 +125,31 @@ return currentField.getOuts();
 
 private void moveOneBase(Player p) throws Exception{
 	currentField.one.addPlayerToBase(p);
-	isPlayerOutOnBase(1, checkIfPlayerIsSafe(1));
+	isPlayerOutOnBase(1, checkIfPlayerIsOnSameBaseAsBall(1));
 }
 
 private void moveTwoBases(Player p) throws Exception{
 	currentField.one.addPlayerToBase(p);
-	boolean b = isPlayerOutOnBase(1, checkIfPlayerIsSafe(1));
+	boolean b = isPlayerOutOnBase(1, checkIfPlayerIsOnSameBaseAsBall(1));
 	
 	if(!b){
 		currentField.one.movePlayerOneBase();
-		isPlayerOutOnBase(2, checkIfPlayerIsSafe(2));
+		isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2));
 		}
 }
 
 private void movePlayerThreeBases(Player p) throws Exception{
 	currentField.one.addPlayerToBase(p);
-	boolean b = isPlayerOutOnBase(1, checkIfPlayerIsSafe(1));
+	boolean b = isPlayerOutOnBase(1, checkIfPlayerIsOnSameBaseAsBall(1));
 	
 	if(!b){
 		currentField.one.movePlayerOneBase();
-		b = isPlayerOutOnBase(2, checkIfPlayerIsSafe(2));
+		b = isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2));
 		}
 	
 	if(!b){
 		currentField.two.movePlayerOneBase();
-		isPlayerOutOnBase(3, checkIfPlayerIsSafe(3));
+		isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3));
 	}
 }
 
@@ -186,7 +184,7 @@ private boolean isBallCaught(int x, int y){
 	return currentField.wasBallCaught(x, y);
 }
 
-private boolean checkIfPlayerIsSafe(int baseNum){
+private boolean checkIfPlayerIsOnSameBaseAsBall(int baseNum){
 	//gridFieldArray[2][3].setKey("2B", 8);
 	//gridFieldArray[3][0].setKey("3B", 8);
 	//gridFieldArray[3][4].setKey("1B", 5);
@@ -229,8 +227,7 @@ else return false;
 		return isBallCaught(temp[0], temp[1]);
 	}
 	
-	return false;
-	*/
+	return false;*/
 }
 
 private boolean isPlayerOutOnBase(int baseNum, boolean b) throws Exception{
@@ -238,44 +235,43 @@ try{
 	if(currentAmountOfOuts + currentField.getOuts() >= 3){
 		throw new Exception("3 outs have happened");
 	}
-	boolean ballCaught = checkIfPlayerIsSafe(baseNum);
-	if((ballCaught)){
+	if((b)){
 	System.out.println("Player may get out on base");
 	switch (baseNum){
 		case 1: {
-			if(!checkIfPlayerIsSafe(1)){
+		//	if(!checkIfPlayerIsOnSameBaseAsBall(1)){
 				currentField.addOneToOuts();
 				System.out.println("Player got out on 1st base!");
 				currentField.one.removePlayerFromBase();
 				return true;
-			}
-			else return false;
+			//}
+			//else return false;
 		}
 		case 2: {
-			if(!checkIfPlayerIsSafe(2)){
+			//if(!checkIfPlayerIsOnSameBaseAsBall(2)){
 				currentField.addOneToOuts();
 				System.out.println("Player got out on 2nd base!");
 				currentField.two.removePlayerFromBase();
 				return true;
-			}
-			else return false;
+		//	}
+			//else return false;
 		}
 		case 3: {
-			if(!checkIfPlayerIsSafe(3)){
+			//if(!checkIfPlayerIsOnSameBaseAsBall(3)){
 				currentField.addOneToOuts();
 				System.out.println("Player got out on 3rd base!");
 				currentField.three.removePlayerFromBase();
 				return true;
-			}
-			else return false;
+		//	}
+			//else return false;
 		}
 		case 4: {
-			if(!checkIfPlayerIsSafe(4)){
+			//if(!checkIfPlayerIsOnSameBaseAsBall(4)){
 				currentField.addOneToOuts();
 				System.out.println("Player got out on home plate!");
-				return true;
-			}
-			else return false;
+			return true;
+		//	}
+			//else return false;
 		}
 		default: {
 			System.out.println("SOMETHING WENT WRONG");
@@ -283,7 +279,7 @@ try{
 	}
 	
 	}
-	System.out.println("Player made it to base safely!" + ballCaught);
+	System.out.println("Player made it to base safely!" + b);
 	return false;
 }
 	finally{
@@ -295,7 +291,7 @@ private void playerOnThrid(){
 	}
 	else{
 		try{
-		boolean test = isPlayerOutOnBase(4, checkIfPlayerIsSafe(4));
+		boolean test = isPlayerOutOnBase(4, checkIfPlayerIsOnSameBaseAsBall(4));
 		
 		if(!test){
 		currentField.three.movePlayerOneBase();
@@ -333,7 +329,7 @@ System.out.println("amount of bases to move is 1, walk ");
 		}
 }
 
-public void newPlayerOnBasesHomerun(Player p){
+private void newPlayerOnBasesHomerun(Player p){
 	System.out.println("Homerun!!");
 	
 	if(!(currentField.three.getPlayerOnBase() == null)){
@@ -363,8 +359,9 @@ public void newPlayerOnBasesHomerun(Player p){
 	currentField.three.movePlayerOneBase();
 	currentField.addScore();
 	System.out.println(currentField.home.getPlayerOnBase() + " has scored");
+	System.out.println("amount of outs " + currentField.getOuts());
 }
-		
+	
 
 }
 

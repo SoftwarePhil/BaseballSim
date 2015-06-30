@@ -73,7 +73,7 @@ while(teams[battingTeam].getOuts() < 3){
 	
 	else{
 		teams[battingTeam].addOneToOuts();
-		System.out.println("OUT HAS HAPPENED");
+		System.out.println("OUT HAS HAPPENED " + teams[battingTeam].getOuts());
 			}
 	}
 	teams[battingTeam].addNumToScore(cf.getScore());
