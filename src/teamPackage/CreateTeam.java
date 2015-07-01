@@ -17,10 +17,13 @@ private int teamCounter = 0;
 private int pitcherCount = 1;
 private int battingLineup = 9;
 
-public Team[] createTeams(String team_name_home, String team_name_away){
+private String teamBatting;
+private String teamPitching;
+
+public Team[] createTeams(String teamNameHome, String teamNameAway){
 	
-	this.teamNameHome = team_name_home;
-	this.teamNameAway = team_name_away;
+	this.teamNameHome = teamNameHome;
+	this.teamNameAway = teamNameAway;
 	
 	home = createTeam(this.teamNameHome);
 	away = createTeam(this.teamNameAway);
@@ -31,20 +34,38 @@ public Team[] createTeams(String team_name_home, String team_name_away){
 	
 }
 
-public Team createTeam(String team_name) {
+public Team createTeam(String teamName) {
 	// batting_players.append(([row["Name"].replace(" ", ""), row["Position"], float(row["H"]), float(row["IPR"]), float(row["O-Swing%"]), float(row["Z-Swing%"]), float(row["O-Contact%"]), float(row["Z-Contact%"]), float(row["1B%"]), float(row["2B%"]), float(row["3B%"]), float(row["HR%"]), float(row["FP"])]))
 
 	Team team = new Team();
-	team.setTeamName(team_name);
+	team.setTeamName(teamName);
 	int temp2 = 0;
+	
+	switch(teamName){
+	case "Yankees":{
+		teamBatting = "teams/Yankees_batting.txt";
+		teamPitching = "teams/Yankees_pitchers.txt";
+	}
+	case "Phillies":{
+		teamBatting = "teams/Phillies_batting.txt";
+		teamPitching = "teams/Phillies_pitchers.txt";
+	}
+	case "Red_Sox":{
+		teamBatting = "teams/Red_Sox_batting.txt";
+		teamPitching = "teams/Red_Sox_pitchers.txt";
+	}
+	default:{
+		System.out.println("enter a valid team, capitalize");
+	}
+	}
 	
 	
 	try {
 		BufferedReader reader = new BufferedReader(
-		        new FileReader(("team.txt")));
+		        new FileReader((teamBatting)));
 		
 		BufferedReader reader_2 = new BufferedReader(
-		        new FileReader(("pitchers.txt")));
+		        new FileReader((teamPitching)));
 		
 		Scanner scanner = new Scanner(reader);
 		

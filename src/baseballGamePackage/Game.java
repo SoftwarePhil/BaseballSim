@@ -60,6 +60,7 @@ public void teamAtBat(){
 cf.start(teams[pitchingTeam]);
 while(teams[battingTeam].getOuts() < 3){
 	currentBattingPlayer = teams[battingTeam].getNextPlayerAtBat();
+	System.out.println(currentBattingPlayer + " is at bat");
 	CurrentBatting cb = new CurrentBatting(teams[pitchingTeam].getPitcher(), currentBattingPlayer );
 	amountOfBasesToMove = bat.startBatting(cb);
 	
@@ -93,17 +94,20 @@ public void inning(){
 	innings++;
 }
 
-public void playGame(){
+public int[] playGame(){
 while(innings < 9){
 	inning();
 	System.out.println("score at end of inning " + innings + " is: " +"\n"
-	+"Home Team: "+ teams[0].getScore() +"\n"+ "Away Team: "+ teams[1].getScore());
+	+"Home Team: "  + teams[0].getTeamName() +" "+ teams[0].getScore() +"\n"+ "Away Team: "  + teams[1].getTeamName() +" "+ teams[1].getScore());
 }
 while(teams[0].getScore() == teams[1].getScore()){
 	inning();
 	System.out.println("score at end of inning " + innings + " is: " +"\n"
-	+"Home Team: "+ teams[0].getScore() +"\n" + "Away Team: "+ teams[1].getScore());
+	+"Home Team: "  + teams[0].getTeamName() +" "+ teams[0].getScore() +"\n" + "Away Team: " + teams[1].getTeamName() +" " + teams[1].getScore());
 }
+
+int[] temp = {teams[0].getScore(), teams[1].getScore()};
+return temp;
 
 }
 }

@@ -1,6 +1,4 @@
 package fieldingPackage;
-import java.util.Arrays;
-
 import teamPackage.Team;
 
 
