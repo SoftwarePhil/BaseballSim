@@ -94,7 +94,7 @@ public void putBallIntoRandomSquare(){
 }
 
 public void putBallIntoRandomInFieldSquare(){
-	ball.setPostion((int)(Math.random()*2 + 2), (int)(Math.random()*4));
+	ball.setPostion(((int)(Math.random()*2) + 2), (int)(Math.random()*4));
 }
 
 public boolean wasBallCaught(int x, int y){

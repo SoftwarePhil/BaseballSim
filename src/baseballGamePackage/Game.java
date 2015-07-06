@@ -84,12 +84,12 @@ while(teams[battingTeam].getOuts() < 3){
 
 public void inning(){
 	teamAtBat();
-	System.out.println("NEW TEAM AT BAT");
-	System.out.println();
 	switchTeams();
+	System.out.println("NEW TEAM AT BAT " + teams[battingTeam].getTeamName());
+	System.out.println();
 	teamAtBat();
 	switchTeams();
-	System.out.println("NEW TEAM AT BAT");
+	System.out.println("NEW TEAM AT BAT " + teams[battingTeam].getTeamName());
 	System.out.println();
 	innings++;
 }

@@ -74,17 +74,6 @@ if(!(checkIfBallIsCaught())){
 					movePlayerThreeBases(p);
 					break;
 				}
-				
-				/*case 4:{
-					currentField.one.movePlayerOneBase();
-					isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2));
-					currentField.two.movePlayerOneBase();
-					isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3));
-					playerOnThrid();
-					
-					movePlayerFourBases(p);
-					break;
-				}*/
 			}
 		}
 		else {
@@ -101,10 +90,6 @@ if(!(checkIfBallIsCaught())){
 				movePlayerThreeBases(p);
 				break;
 			}
-			/*case 4: {
-				movePlayerFourBases(p);
-				break;
-			}*/
 			}
 		};
 	}
@@ -152,21 +137,6 @@ private void movePlayerThreeBases(Player p) throws Exception{
 	}
 }
 
-private void movePlayerFourBases(Player p){
-	currentField.one.addPlayerToBase(p);
-	currentField.two.movePlayerOneBase();
-		
-	if(currentField.three.getPlayerOnBase() == null){
-		
-	}
-
-	else{
-	currentField.three.movePlayerOneBase();
-	currentField.addScore();
-	System.out.println(currentField.home.getPlayerOnBase() + " has scored");
-	}
-}
-
 private boolean checkIfBallIsCaught(){
 	//gridFieldArray[0][0].setKey("LF", 15);
 	//gridFieldArray[0][2].setKey("CF", 15);
@@ -190,12 +160,14 @@ private boolean checkIfPlayerIsOnSameBaseAsBall(int baseNum){
 	//gridFieldArray[3][0].setKey("3B", 8);
 	//gridFieldArray[3][4].setKey("1B", 5);
 	//gridFieldArray[3][2].setKey("C", 8);
+/*
 int rand = (int)(Math.random()*100);
 if(rand > 60){
 	return true;
 }
 else return false;
-	/*
+*/
+	
 	currentField.putBallIntoRandomInFieldSquare();
 	
 	int[] basePos = new int[2];
@@ -228,7 +200,7 @@ else return false;
 		return isBallCaught(temp[0], temp[1]);
 	}
 	
-	return false;*/
+	return false;
 }
 
 private boolean isPlayerOutOnBase(int baseNum, boolean b) throws Exception{

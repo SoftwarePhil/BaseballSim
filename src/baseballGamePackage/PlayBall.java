@@ -1,9 +1,6 @@
 package baseballGamePackage;
 
-
-
 public class PlayBall {
-
 
 public static void main(String[] args){
 	
@@ -18,7 +15,7 @@ public static void main(String[] args){
 	
 	
 	for(int x = 0; x < amountOfGames - 1; x++){
-		Game b = new Game("Yankees", "Yankees");
+		Game b = new Game("Yankees", "Red_Soxs");
 		b.playGame();
 		avg[0] = avg[0] + b.playGame()[0];
 		avg[1] = avg[1] + b.playGame()[1];
