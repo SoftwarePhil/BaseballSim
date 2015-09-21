@@ -38,9 +38,10 @@ if(!(checkIfBallIsCaught())){
 		
 		if(!(currentField.two.getPlayerOnBase() == null)){
 			currentField.two.movePlayerOneBase();
-			isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3));
-			if(n >= 2){
-				playerOnThrid();
+			if(isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3))){
+				if(n >= 2){
+					playerOnThrid();
+					}
 				}
 		}
 		
@@ -48,31 +49,36 @@ if(!(checkIfBallIsCaught())){
 			switch (n){
 				case 1: {
 					currentField.one.movePlayerOneBase();
-					isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2));
 					
-					moveOneBase(p);
+					if(isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2))){
+						moveOneBase(p);
+					}
 					break;
 				}
 				
 				case 2: {
 					currentField.one.movePlayerOneBase();
-					isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2));
-					currentField.two.movePlayerOneBase();
-					isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3));
-	
-					moveTwoBases(p);
+					if(isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2))){
+						currentField.two.movePlayerOneBase();
+					
+						if(isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3))){
+							moveTwoBases(p);
+						}
+					}
 					break;
 				}
 				
 				case 3: {
 					currentField.one.movePlayerOneBase();
-					isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2));
-					currentField.two.movePlayerOneBase();
-					isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3));
-					playerOnThrid();
-	
-					movePlayerThreeBases(p);
-					break;
+					if(isPlayerOutOnBase(2, checkIfPlayerIsOnSameBaseAsBall(2))){
+						currentField.two.movePlayerOneBase();
+						
+						if(isPlayerOutOnBase(3, checkIfPlayerIsOnSameBaseAsBall(3))){
+							playerOnThrid();
+							movePlayerThreeBases(p);
+						break;
+						}
+					}
 				}
 			}
 		}
